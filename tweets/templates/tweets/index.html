@@ -1,0 +1,54 @@
+{% extends 'tweets/base.html' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <p> Col 1 out of 3</p>
+                <h1>Left bar menu</h1>
+                <div class="row">
+                    <p>Left item</p>
+                </div>
+               <div class="row">
+                    <p>Left item</p>
+                </div>
+                 <div class="row">
+                    <p>Left item</p>
+                </div>
+                 <div class="row">
+                    <p>Left item</p>
+                </div>
+                 <div class="row">
+                    <p>Left item</p>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <p>Col 2 out of 3</p>
+                <h1>Main col</h1>
+            </div>
+
+            <div class="col-sm">
+                <p>Col 3 out of 3</p>
+                <h1>Right col</h1>
+            </div>
+        </div>
+    </div>
+
+{#    <h1> WELCOME TO TWITTER</h1>#}
+
+{% endblock %}
+
+</body>
+</html>

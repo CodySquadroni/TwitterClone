@@ -1,0 +1,116 @@
+{% extends 'tweets/base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+{% block body %}
+
+    <h4>{{ profile.user|upper }}'s Profile</h4>
+    <h6>Your username: </h6>
+    <p>{{ profile.user }}</p>
+
+
+
+
+
+    <hr>
+
+    <h6>You follow: </h6>
+    {% for user_followed in profile.follows.all %}
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{% static 'images/user_icon.png' %}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user_followed }}</h5>
+                        <a class="card-text" href="{% url 'profile' user_followed.id %}">@{{ user_followed|lower }}</a>
+                        <br>
+                        <p class="card-text"><small
+                                class="text-muted">Joined: {{ user_followed.profile.joined_date }}</small></p>
+
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            {% if user_followed in user.profile.follows.all %}
+
+                                <button class="btn btn-outline-danger" name="follow" value="unfollow" type="submit">
+                                    Unfollow
+                                    @{{ user_followed }}</button>
+
+                            {% else %}
+
+                                <button class="btn btn-outline-success" name="follow" value="follow" type="submit">
+                                    Follow
+                                    @{{ user_followed }}</button>
+
+                            {% endif %}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+    {% endfor %}
+
+
+    <hr>
+
+    <h6>Follows You:</h6>
+
+
+    {#    Different visual for "Follows You"#}
+    {#    <div class="card">#}
+    {#        <div class="card-header">#}
+    {#            Follows You#}
+    {#        </div>#}
+    {#        <div class="card-body">#}
+    {#            <p class="card-text">#}
+    {#                {% for user_following_you in profile.user.followed_by.all %}#}
+    {#                    <a#}
+    {#                       href="{% url 'profile' user_following_you.id %}">@{{ user_following_you|lower }}</a>#}
+    {#                    <br>#}
+    {#                {% endfor %}#}
+    {#            </p>#}
+    {#        </div>#}
+    {#    </div>#}
+
+    {% for user_following_you in profile.user.followed_by.all %}
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{% static 'images/user_icon.png' %}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user_following_you }} TEST</h5>
+                        <a class="card-text"
+                           href="{% url 'profile' user_following_you.id %}">@{{ user_following_you|lower }}</a>
+                        <br>
+                        <p class="card-text"><small
+                                class="text-muted">Joined: {{ user_following_you.profile.joined_date }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+
+{% endblock %}
+
+</body>
+</html>
